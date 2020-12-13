@@ -40,6 +40,12 @@ if __name__ == '__main__':
     # given k-set for k-NNs         
     k_set = {1,3,5,8,15,20}
     
+    stat_dict = {'num_of_classes':len(dataset.target_names), 'num_of_samples':len(dataset.data), 'num_of_features':len(dataset.data[1])}
+    #display statistics 
+    print('===== DATASET STATISTICS =====')
+    for key, value in stat_dict.items():
+        print('{} : {}'.format(key,value))
+    print('...')
     # random 20% of the dataset.data to form the validation set 
     idx = set()
     # compute the length of 20% of the dataset.data
@@ -70,7 +76,8 @@ if __name__ == '__main__':
         X_train = np.delete(X_train,i,0)
         y_train = np.delete(y_train,i)
      
-    
+    print('Partitioned data into 80/20...')
+    print('...')
     # implement KNNs 
     for k in k_set:
         clf_knn = KNeighborsClassifier(n_neighbors=k)
