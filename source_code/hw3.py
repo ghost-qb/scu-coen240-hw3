@@ -9,6 +9,9 @@ Quan Bach
 
 
 By running thi file:
+    - table of the dataset statistics will be shown in standard output
+    - metrics performance and confusion matrices of different k values fo k-NNs will be shown in standard output 
+    - different plots based on each k will also be shown and saved to current directory 
 
 """
 # for randoming index
@@ -36,6 +39,8 @@ if __name__ == '__main__':
     dataset = load_wine()
     print('...')
     print('Data wine loaded from sklearn...')
+    print('...')
+    print()
     
     # given k-set for k-NNs         
     k_set = {1,3,5,8,15,20}
@@ -45,6 +50,7 @@ if __name__ == '__main__':
     print('===== DATASET STATISTICS =====')
     for key, value in stat_dict.items():
         print('{} : {}'.format(key,value))
+    print('\n'*2) 
     print('...')
     # random 20% of the dataset.data to form the validation set 
     idx = set()
@@ -97,6 +103,7 @@ if __name__ == '__main__':
         print(metrics.confusion_matrix(y_validation,y_predict))
         print()
         print ('NMI Score: ', nmi(y_validation,y_predict))
+        print('Classification Accuracy of KNN: ', metrics.accuracy_score(y_validation,y_predict))
         print('Classification Error of KNN: ', 1 - metrics.accuracy_score(y_validation,y_predict))
         print('Sensitive of KNN: ', metrics.recall_score(y_validation,y_predict, average='weighted'))
         print('Precision of KNN: ', metrics.precision_score(y_validation,y_predict,average='weighted'))
